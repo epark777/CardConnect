@@ -50,3 +50,12 @@
 ## DB SCHEMA
 ![Screenshot 2024-11-20 at 8 04 17 PM](https://github.com/user-attachments/assets/56f288f0-cea5-4126-a0dc-9e11ed6965ea)
 
+## Wireframes
+### Homepage
+![Screenshot 2024-11-21 at 1 58 34 PM](https://github.com/user-attachments/assets/bc2bc816-23bb-4947-9ea4-745508fb675a)
+
+### Create Business Card
+![Screenshot 2024-11-21 at 1 59 00 PM](https://github.com/user-attachments/assets/e4ad4c07-6922-4d00-89f0-865b5cdc4e77)
+
+## Manage Business Card Categories
+![Screenshot 2024-11-21 at 1 59 29 PM](https://github.com/user-attachments/assets/a2670302-6d29-4e2a-bdec-b4774188539d)
