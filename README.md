@@ -46,5 +46,7 @@
     - Click on "Add Note."
     - Enter a note with additional details (e.g., "Met at XYZ Conference")
     - Save the note for future reference
-   
+
+## DB SCHEMA
+![Screenshot 2024-11-20 at 8 04 17 PM](https://github.com/user-attachments/assets/56f288f0-cea5-4126-a0dc-9e11ed6965ea)
 
