@@ -1,4 +1,5 @@
 from app.models import Share, db, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_shares():
@@ -16,5 +17,5 @@ def undo_shares():
     if environment == "production":
         db.session.execute(f"TRUNCATE TABLE {SCHEMA}.shares RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
+        db.session.execute(text("DELETE FROM shares"))
     db.session.commit()

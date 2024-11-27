@@ -1,4 +1,5 @@
 from app.models import Note, db, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_notes():
@@ -24,5 +25,5 @@ def undo_notes():
     if environment == "production":
         db.session.execute(f"TRUNCATE TABLE {SCHEMA}.notes RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
+        db.session.execute(text("DELETE FROM notes"))
     db.session.commit()

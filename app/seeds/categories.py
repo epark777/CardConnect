@@ -1,4 +1,5 @@
 from app.models import Category, db, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_categories():
@@ -17,5 +18,5 @@ def undo_categories():
     if environment == "production":
         db.session.execute(f"TRUNCATE TABLE {SCHEMA}.categories RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
+        db.session.execute(text("DELETE FROM categories"))
     db.session.commit()

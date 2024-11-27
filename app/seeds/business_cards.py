@@ -1,4 +1,5 @@
 from app.models import BusinessCard, db, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_business_cards():
@@ -32,5 +33,5 @@ def undo_business_cards():
     if environment == "production":
         db.session.execute(f"TRUNCATE TABLE {SCHEMA}.cards RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
+        db.session.execute(text("DELETE FROM cards"))
     db.session.commit()
