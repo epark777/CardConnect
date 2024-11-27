@@ -4,16 +4,21 @@ from sqlalchemy.sql import text
 
 def seed_business_cards():
 
-    cards = [
-        BusinessCard(
-            user_id=1,
-            name="John Doe",
-            title="Software Engineer",
-            company="TechCorp",
-            email="demo@aa.io",
-            phone="+123456789",
-            website="https://techcorp.com",
+    card1 = (
+        (
+            BusinessCard(
+                user_id=1,
+                name="John Doe",
+                title="Software Engineer",
+                company="TechCorp",
+                email="demo@aa.io",
+                phone="+123456789",
+                website="https://techcorp.com",
+            )
         ),
+    )
+
+    card2 = (
         BusinessCard(
             user_id=2,
             name="Marnie App",
@@ -23,9 +28,9 @@ def seed_business_cards():
             phone="+987654321",
             website="https://innovate.com",
         ),
-    ]
+    )
 
-    db.session.bulk_save_objects(cards)
+    db.session.add_all([card1, card2])
     db.session.commit()
 
 

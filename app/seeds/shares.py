@@ -3,13 +3,12 @@ from sqlalchemy.sql import text
 
 
 def seed_shares():
+    share1 = Share(
+        card_id=1, shared_with_email="collaborator@example.com")
+    share2 = Share(
+        card_id=2, shared_with_email="partner@example.com")
 
-    shares = [
-        Share(card_id=1, shared_with_email="collaborator@example.com"),
-        Share(card_id=2, shared_with_email="partner@example.com"),
-    ]
-
-    db.session.bulk_save_objects(shares)
+    db.session.add_all([share1, share2])
     db.session.commit()
 
 
