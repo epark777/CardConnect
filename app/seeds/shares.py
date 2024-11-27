@@ -1,4 +1,4 @@
-from app.models import Share, db
+from app.models import Share, db, environment, SCHEMA
 
 
 def seed_shares():
@@ -13,6 +13,8 @@ def seed_shares():
 
 
 def undo_shares():
-
-    db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")  # Postgres
+    if environment == "production":
+        db.session.execute(f"TRUNCATE TABLE {SCHEMA}.shares RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
     db.session.commit()
