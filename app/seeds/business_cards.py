@@ -1,4 +1,4 @@
-from app.models import BusinessCard, db
+from app.models import BusinessCard, db, environment, SCHEMA
 
 
 def seed_business_cards():
@@ -29,8 +29,8 @@ def seed_business_cards():
 
 
 def undo_business_cards():
-
-    db.session.execute(
-        "TRUNCATE TABLE business_cards RESTART IDENTITY CASCADE;"
-    )  # Postgres
+    if environment == "production":
+        db.session.execute(f"TRUNCATE TABLE {SCHEMA}.cards RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
     db.session.commit()

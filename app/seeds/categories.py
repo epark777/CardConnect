@@ -1,4 +1,4 @@
-from app.models import Category, db
+from app.models import Category, db, environment, SCHEMA
 
 
 def seed_categories():
@@ -14,8 +14,8 @@ def seed_categories():
 
 
 def undo_categories():
-
-    db.session.execute(
-        "TRUNCATE TABLE categories RESTART IDENTITY CASCADE;"
-    )  # Postgres
+    if environment == "production":
+        db.session.execute(f"TRUNCATE TABLE {SCHEMA}.categories RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("TRUNCATE TABLE shares RESTART IDENTITY CASCADE;")
     db.session.commit()
