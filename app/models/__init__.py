@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA
 from .user import User
 from .business_cards import BusinessCard
 from .category import Category
