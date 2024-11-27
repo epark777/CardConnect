@@ -15,9 +15,9 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # Relationships
-    business_cards = db.relationship('BusinessCard', back_populates='user')
-    categories = db.relationship('Category', back_populates='user')
-    notes = db.relationship('Note', back_populates='user')
+    business_cards = db.relationship('BusinessCard', back_populates='user', cascade="all, delete-orphan")
+    categories = db.relationship('Category', back_populates='user', cascade="all, delete-orphan")
+    notes = db.relationship('Note', back_populates='user', cascade="all, delete-orphan")
 
     @property
     def password(self):

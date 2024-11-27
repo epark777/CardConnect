@@ -19,8 +19,8 @@ class BusinessCard(db.Model):
 
     # Relationships
     user = db.relationship('User', back_populates='business_cards')
-    notes = db.relationship('Note', back_populates='card')
-    shares = db.relationship('Share', back_populates='card')
+    notes = db.relationship('Note', back_populates='card', cascade="all, delete-orphan")
+    shares = db.relationship('Share', back_populates='card', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
