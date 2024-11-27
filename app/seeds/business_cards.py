@@ -4,9 +4,7 @@ from sqlalchemy.sql import text
 
 def seed_business_cards():
 
-    card1 = (
-        (
-            BusinessCard(
+    card1 = BusinessCard(
                 user_id=1,
                 name="John Doe",
                 title="Software Engineer",
@@ -14,12 +12,9 @@ def seed_business_cards():
                 email="demo@aa.io",
                 phone="+123456789",
                 website="https://techcorp.com",
-            )
-        ),
-    )
+            ),
 
-    card2 = (
-        BusinessCard(
+    card2 = BusinessCard(
             user_id=2,
             name="Marnie App",
             title="Product Manager",
@@ -28,7 +23,6 @@ def seed_business_cards():
             phone="+987654321",
             website="https://innovate.com",
         ),
-    )
 
     db.session.add_all([card1, card2])
     db.session.commit()
