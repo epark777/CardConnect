@@ -1,34 +1,19 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import './Home.css';
 
-const HomePage = () => {
-   const sessionUser = useSelector((state) => state.session.user);
-
-   return (
-      <div className="homepage">
-         <h1>Welcome to CardConnect!</h1>
-         {!sessionUser ? (
-            <div>
-               <p>Sign up to create and manage your business cards!</p>
-               <div>
-                  <NavLink to="/signup" className="signup-button">
-                     Sign Up
-                  </NavLink>
-                  <NavLink to="/login" className="login-button">
-                     Log In
-                  </NavLink>
-               </div>
-            </div>
-         ) : (
-            <div>
-               <p>Welcome back, {sessionUser.username}!</p>
-               <NavLink to="/cards" className="dashboard-button">
-                  Go to Your Cards
-               </NavLink>
-            </div>
-         )}
+function Home() {
+  return (
+    <div className="homepage">
+      <div className="homepage-content">
+        <h1>Welcome to CardConnect</h1>
+        <p>Organize, share, and grow your network with digital business cards.</p>
+        <div className="homepage-buttons">
+          <NavLink to="/signup" className="button signup-button">Sign Up</NavLink>
+          <NavLink to="/login" className="button login-button">Log In</NavLink>
+        </div>
       </div>
-   );
-};
+    </div>
+  );
+}
 
-export default HomePage;
+export default Home;

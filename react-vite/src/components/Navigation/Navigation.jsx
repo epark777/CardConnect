@@ -6,30 +6,37 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
    const sessionUser = useSelector((state) => state.session.user);
 
+   console.log("Session user:", sessionUser);
+
    return (
       <div className="navbar">
-         <NavLink to="/">
-            <div>
-               <span>CardConnect</span>
-            </div>
+
+         <NavLink to="/" className="logo">
+            <span>CardConnect</span>
          </NavLink>
 
+
          <div className="right-side">
-            {isLoaded && (
-               <>
-                  {sessionUser ? (
+            {isLoaded ? (
+               sessionUser ? (
+                  <>
                      <NavLink to="/add" className="create-card-button">
-                        Add New Business Card
+                        Add Business Card
                      </NavLink>
-                  ) : (
+                     <ProfileButton />
+                  </>
+               ) : (
+                  <>
                      <NavLink to="/signup" className="signup-button">
                         Sign Up
                      </NavLink>
-                  )}
-                  <div className="profile-button">
-                     <ProfileButton />
-                  </div>
-               </>
+                     <NavLink to="/login" className="login-button">
+                        Log In
+                     </NavLink>
+                  </>
+               )
+            ) : (
+               <p>Loading...</p>
             )}
          </div>
       </div>
