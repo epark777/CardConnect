@@ -4,19 +4,32 @@ from app.models import BusinessCard, db
 
 card_routes = Blueprint('card', __name__)
 
-# Create new Business Card
+# Create a new business card
 @card_routes.route('/', methods=['POST'])
 @login_required
 def create_card():
-
     data = request.json
 
-    # Create a new business card associated with the logged-in user
-    card = BusinessCard(user_id=current_user.id, **data)
+    name = data.get('name')
+    if not name:
+        return jsonify({'error': 'Name is required'}), 400
+
+
+    card = BusinessCard(
+        user_id=current_user.id,
+        name=name,
+        title=data.get('title'),
+        company=data.get('company'),
+        email=data.get('email'),
+        phone=data.get('phone'),
+        website=data.get('website'),
+        social_links=data.get('social_links')
+    )
     db.session.add(card)
     db.session.commit()
 
     return jsonify({'message': 'Business card created successfully', 'card_id': card.id}), 201
+
 
 # Get all business cards for logged-in user
 @card_routes.route('/', methods=['GET'])
@@ -42,17 +55,23 @@ def get_card(card_id):
 @card_routes.route('/<int:card_id>', methods=['PUT'])
 @login_required
 def update_card(card_id):
-
     card = BusinessCard.query.filter_by(id=card_id, user_id=current_user.id).first()
     if not card:
         return jsonify({'error': 'Card not found or unauthorized access'}), 404
 
     data = request.json
+
+    allowed_fields = {'name', 'title', 'company', 'email', 'phone', 'website', 'social_links'}
     for key, value in data.items():
-        setattr(card, key, value)
-    
+        if key in allowed_fields:
+            setattr(card, key, value)
+
+    if not card.name:
+        return jsonify({'error': 'Name is required'}), 400
+
     db.session.commit()
     return jsonify({'message': 'Business card updated successfully', 'card_id': card.id}), 200
+
 
 
 # Delete a business card if it belongs to the currently logged-in user.
