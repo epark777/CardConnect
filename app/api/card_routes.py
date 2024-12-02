@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import BusinessCard, db
 
-card_routes = Blueprint('card', __name__)
+card_routes = Blueprint('card', __name__, url_prefix='/api/card')
 
 # Create a new business card
 @card_routes.route('/', methods=['POST'])

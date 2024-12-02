@@ -1,0 +1,107 @@
+.notes-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.notes-modal-content {
+   background: white;
+   padding: 20px;
+   border-radius: 8px;
+   width: 300px;
+   text-align: center;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   position: relative; /* For the close button */
+}
+
+.notes-modal-content h2 {
+   color: black;
+   margin-bottom: 15px;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.notes-list {
+   margin-bottom: 20px;
+   max-height: 150px;
+   overflow-y: auto; /* Scrollable list of notes */
+   text-align: left;
+}
+
+.note-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 10px;
+   padding: 8px;
+   background-color: #f9f9f9;
+   border-radius: 4px;
+}
+
+.note-item h3 {
+   color: black;
+   margin: 0;
+   flex: 1;
+}
+
+.note-item button {
+   margin-left: 10px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   padding: 5px 8px;
+   cursor: pointer;
+}
+
+.note-item button:hover {
+   background-color: #0056b3;
+}
+
+.add-note textarea {
+   width: 100%;
+   height: 60px;
+   margin-bottom: 15px;
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   resize: none;
+}
+
+.notes-actions {
+   display: flex;
+   justify-content: space-around;
+   margin-top: 10px;
+}
+
+.notes-actions .card-button {
+   padding: 8px 15px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   background-color: #007bff;
+   color: white;
+}
+
+.notes-actions .card-button:hover {
+   background-color: #0056b3;
+}
+
+.close-button {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   background: none;
+   border: none;
+   font-size: 18px;
+   cursor: pointer;
+   font-weight: bold;
+   color: black;
+}

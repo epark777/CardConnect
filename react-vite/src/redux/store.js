@@ -7,10 +7,16 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import cardReducer from "./cards";
+import categoriesReducer from "./categories";
+import notesReducer from "./notes";
+import sharesReducer from "./shares";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   cards: cardReducer,
+  categories: categoriesReducer,
+  notes: notesReducer,
+  shares: sharesReducer
 });
 
 let enhancer;
