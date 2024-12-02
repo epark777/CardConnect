@@ -12,6 +12,7 @@ class Category(db.Model):
 
     # Relationships
     user = db.relationship('User', back_populates='categories')
+    business_cards = db.relationship('BusinessCard', back_populates='category')
 
     def to_dict(self):
         return {

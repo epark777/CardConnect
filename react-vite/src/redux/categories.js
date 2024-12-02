@@ -1,13 +1,8 @@
-const CATEGORIES_LOADING = 'categories/LOADING';
-const CATEGORIES_RESULT = 'categories/RESULT';
 const ADD_CATEGORY = 'categories/ADD';
+const SET_CATEGORIES = 'categories/SET';
 
-const setCategoriesLoading = () => ({
-    type: CATEGORIES_LOADING,
-});
-
-const setCategoriesResult = (categories) => ({
-    type: CATEGORIES_RESULT,
+const setCategoriesAction = (categories) => ({
+    type: SET_CATEGORIES,
     payload: categories,
 });
 
@@ -18,11 +13,10 @@ const addCategoryAction = (category) => ({
 
 // Fetch all categories
 export const fetchCategories = () => async (dispatch) => {
-    dispatch(setCategoriesLoading());
     try {
         const response = await fetch('/api/categories/');
         const data = await response.json();
-        dispatch(setCategoriesResult(data));
+        dispatch(setCategoriesAction(data));
     } catch (error) {
         console.error('Failed to fetch categories:', error);
     }
@@ -43,18 +37,14 @@ export const createCategory = (name) => async (dispatch) => {
     }
 };
 
-
 const initialState = {
     items: [],
-    loading: false,
 };
 
 const categoriesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CATEGORIES_LOADING:
-            return { ...state, loading: true };
-        case CATEGORIES_RESULT:
-            return { ...state, loading: false, items: action.payload };
+        case SET_CATEGORIES:
+            return { ...state, items: action.payload };
         case ADD_CATEGORY:
             return { ...state, items: [...state.items, action.payload] };
         default:

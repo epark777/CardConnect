@@ -15,10 +15,12 @@ class BusinessCard(db.Model):
     phone = db.Column(db.String(20))
     website = db.Column(db.String(255))
     social_links = db.Column(db.Text)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     # Relationships
     user = db.relationship('User', back_populates='business_cards')
+    category = db.relationship('Category', back_populates='business_cards')
     notes = db.relationship('Note', back_populates='card', cascade="all, delete-orphan")
     shares = db.relationship('Share', back_populates='card', cascade="all, delete-orphan")
 

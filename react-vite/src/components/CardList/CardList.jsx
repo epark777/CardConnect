@@ -121,7 +121,7 @@ const CardList = () => {
                         className="card-button"
                         onClick={() => openNotesModal(card.id)}
                      >
-                        Manage Notes
+                        Add / Manage Notes
                      </button>
                   </div>
                </div>
