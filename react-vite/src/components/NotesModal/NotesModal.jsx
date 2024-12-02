@@ -27,10 +27,14 @@ const NotesModal = ({ cardId, isVisible, onClose }) => {
       }
    };
 
-   const handleUpdateNote = async (noteId, updatedContent) => {
+   const handleUpdateNote = async (noteId) => {
+      const updatedContent = editingNotes[noteId];
+      if (!updatedContent || !updatedContent.trim()) return;
+
       try {
          await dispatch(updateNote(noteId, updatedContent));
-         setEditingNotes((prev) => ({ ...prev, [noteId]: false })); // Exit edit mode
+         setEditingNotes((prev) => ({ ...prev, [noteId]: undefined }));
+         dispatch(fetchNotes(cardId));
       } catch (error) {
          console.error('Failed to update note:', error);
       }
@@ -55,11 +59,11 @@ const NotesModal = ({ cardId, isVisible, onClose }) => {
             <div className="notes-list">
                {notes.map((note) => (
                   <div key={note.id} className="note-item">
-                     {editingNotes[note.id] ? (
+                     {editingNotes[note.id] !== undefined ? (
                         <>
                            <input
                               type="text"
-                              value={note.content}
+                              value={editingNotes[note.id]}
                               onChange={(e) =>
                                  setEditingNotes((prev) => ({
                                     ...prev,
@@ -67,15 +71,18 @@ const NotesModal = ({ cardId, isVisible, onClose }) => {
                                  }))
                               }
                            />
+                           <button onClick={() => handleUpdateNote(note.id)}>
+                              Save
+                           </button>
                            <button
                               onClick={() =>
-                                 handleUpdateNote(
-                                    note.id,
-                                    editingNotes[note.id],
-                                 )
+                                 setEditingNotes((prev) => ({
+                                    ...prev,
+                                    [note.id]: undefined,
+                                 }))
                               }
                            >
-                              Save
+                              Cancel
                            </button>
                         </>
                      ) : (
@@ -106,7 +113,9 @@ const NotesModal = ({ cardId, isVisible, onClose }) => {
                   value={newNote}
                   onChange={(e) => setNewNote(e.target.value)}
                />
-               <button className="card-button" onClick={handleAddNote}>Add Note</button>
+               <button className="card-button" onClick={handleAddNote}>
+                  Add Note
+               </button>
                <button className="card-button" onClick={onClose}>
                   Cancel
                </button>
