@@ -60,7 +60,7 @@
 ## Manage Business Card Categories
 ![Screenshot 2024-11-21 at 1 59 29 PM](https://github.com/user-attachments/assets/a2670302-6d29-4e2a-bdec-b4774188539d)
 
-# Flask React Project
+# Capstone Project
 
 This is the starter for the Flask React project.
 
